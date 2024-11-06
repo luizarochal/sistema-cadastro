@@ -17,7 +17,7 @@ public class Pessoa {
     }
 
     public enum Hobby {
-        ARTE, ESPORTE, CINEMA, LIVRO, MÚSICA, CULINÁRIA, GAME, NENHUM
+        ARTE, ESPORTE, CINEMA, LIVRO, MUSICA, CULINaRIA, GAME, NENHUM
     }
 
     public enum EstadoCivil {

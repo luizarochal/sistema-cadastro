@@ -94,4 +94,27 @@ public class Dataset {
                 .average()
                 .orElse(0.0);
     }
+
+    public void normalizeField(String nomeCampo) {
+        if (nomeCampo.equals("altura")) {
+            double max = maxAltura();
+            pessoas.forEach(p -> p.setAltura((float) (p.getAltura() / max)));
+        } else if (nomeCampo.equals("peso")) {
+            double max = maxPeso();
+            pessoas.forEach(p -> p.setPeso((float) (p.getPeso() / max)));
+        }
+    }
+
+    public List<Double> calcDistanceVector(Pessoa pessoa) {
+        return pessoas.stream()
+                .map(p -> MedidaDeDistancia.calcularDistancia(pessoa, p))
+                .collect(Collectors.toList());
+    }
+
+    public List<Pessoa> getSimilar(Pessoa pessoa, int n) {
+        return pessoas.stream()
+                .sorted(Comparator.comparingDouble(p -> MedidaDeDistancia.calcularDistancia(pessoa, p)))
+                .limit(n)
+                .collect(Collectors.toList());
+    }
 }
